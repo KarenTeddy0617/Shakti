@@ -1,5 +1,5 @@
 "use client";
-"use client";
+
 import { useEffect, useState } from "react";
 import { useRouter,useParams } from "next/navigation";
 import { recipes } from "../../data/recipes";
@@ -21,20 +21,34 @@ export default function RecipePage() {
     if (saved) setTrigger(saved);
   }, []);
 
-  useEffect(() => {
+useEffect(() => {
   async function fetchSettings() {
-    const { data: userData } = await supabase.auth.getUser();
-    const user = userData.user;
+    try {
+      const { data: userData, error: userError } = await supabase.auth.getUser();
+      if (userError || !userData.user) {
+        console.error("No user logged in", userError);
+        return;
+      }
 
-    const { data } = await supabase
-      .from("user_settings")
-      .select("*")
-      .eq("user_id", user.id)
-      .single();
+      const user = userData.user;
 
-    if (data) {
-      setTrigger(data.trigger_ingredient);
-      setRequiredClicks(data.trigger_click_count);
+      const { data, error } = await supabase
+        .from("users")
+        .select("trigger_word, trigger_count")
+        .eq("id", user.id)
+        .single();
+
+      if (error) {
+        console.error("Failed to fetch settings:", error);
+        return;
+      }
+
+      if (data) {
+        setTrigger(data.trigger_word || "Salt");
+        setRequiredClicks(data.trigger_count || 3);
+      }
+    } catch (err) {
+      console.error("Unexpected error fetching settings:", err);
     }
   }
 
@@ -44,7 +58,7 @@ export default function RecipePage() {
   if (!recipe) return <p>Recipe not found</p>;
 
   function handleIngredientClick(name) {
-  if (name === trigger) {
+  if (name.toLowerCase() === trigger) {
     const newCount = clickCount + 1;
     setClickCount(newCount);
 

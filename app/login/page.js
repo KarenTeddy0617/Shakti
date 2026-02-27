@@ -9,27 +9,71 @@ export default function Login() {
   const router = useRouter();
 
   async function handleLogin() {
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email,
-    password,
-  });
+    try {
+      // 1️⃣ Sign in the user
+      const { data: loginData, error: loginError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
 
-  if (error) {
-    console.log("LOGIN ERROR:", error);
-    alert(error.message);
-    return;
+      if (loginError) {
+        alert(loginError.message);
+        console.error("LOGIN ERROR:", loginError);
+        return;
+      }
+
+      const user = loginData.user;
+      if (!user) return;
+
+      // 2️⃣ Check if row exists in 'users' table
+      const { data: userRow, error: rowError } = await supabase
+        .from("users")
+        .select("*")
+        .eq("id", user.id)
+        .single();
+
+      if (rowError && rowError.code === "PGRST116") {
+        // Row not found → insert default row
+        await supabase.from("users").insert({
+          id: user.id,
+          email: user.email,
+          trigger_count: 3,
+          trusted_contact_email: null,
+          trigger_word: null,
+        });
+      }
+
+      // 3️⃣ Redirect to vault
+      router.push("/vault");
+    } catch (err) {
+      console.error("Unexpected error:", err);
+      alert("Something went wrong during login.");
+    }
   }
 
-  console.log("LOGIN SUCCESS:", data);
-  router.push("/vault");
-}
-
   return (
-    <div>
+    <div style={{ padding: "40px", maxWidth: "400px", margin: "auto" }}>
       <h1>Welcome Back</h1>
-      <input onChange={e => setEmail(e.target.value)} placeholder="Email" />
-      <input type="password" onChange={e => setPassword(e.target.value)} placeholder="Password" />
-      <button onClick={handleLogin}>Login</button>
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={e => setEmail(e.target.value)}
+        style={{ display: "block", margin: "15px 0", padding: "10px", width: "100%" }}
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={e => setPassword(e.target.value)}
+        style={{ display: "block", margin: "15px 0", padding: "10px", width: "100%" }}
+      />
+      <button
+        onClick={handleLogin}
+        style={{ padding: "10px 20px", cursor: "pointer" }}
+      >
+        Login
+      </button>
     </div>
   );
 }
