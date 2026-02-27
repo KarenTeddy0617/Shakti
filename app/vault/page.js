@@ -1,11 +1,29 @@
 "use client";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
 
 function Vault() {
   const [note, setNote] = useState("");
   const [file, setFile] = useState(null);
   const [entries, setEntries] = useState([]);
+  const router = useRouter();
+  // ==============================
+  // USER EXISTENCE CHECKING
+  // ==============================
+  
+  useEffect(() => {
+  async function checkSession() {
+    const { data: { session } } = await supabase.auth.getSession();
+
+    if (!session) {
+      router.push("/login");
+    }
+  }
+
+  checkSession();
+}, [router]);
+
 
   // ==============================
   // FETCH JOURNAL ENTRIES

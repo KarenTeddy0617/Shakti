@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { useRouter,useParams } from "next/navigation";
 import { recipes } from "../../data/recipes";
+import { supabase } from "@/lib/supabaseClient";
+import { triggerSOS } from "@/app/vault/page";
 
 
 export default function RecipePage() {
@@ -12,11 +14,32 @@ export default function RecipePage() {
   const router = useRouter();
   const [trigger, setTrigger] = useState("");
   const [clickCount, setClickCount] = useState(0);
+  const [requiredClicks, setRequiredClicks] = useState(3);
 
   useEffect(() => {
     const saved = localStorage.getItem("triggerIngredient");
     if (saved) setTrigger(saved);
   }, []);
+
+  useEffect(() => {
+  async function fetchSettings() {
+    const { data: userData } = await supabase.auth.getUser();
+    const user = userData.user;
+
+    const { data } = await supabase
+      .from("user_settings")
+      .select("*")
+      .eq("user_id", user.id)
+      .single();
+
+    if (data) {
+      setTrigger(data.trigger_ingredient);
+      setRequiredClicks(data.trigger_click_count);
+    }
+  }
+
+  fetchSettings();
+}, []);
 
   if (!recipe) return <p>Recipe not found</p>;
 
@@ -27,7 +50,7 @@ export default function RecipePage() {
 
     setTimeout(() => setClickCount(0), 5000);
 
-    if (newCount === 3) {
+    if (newCount === requiredClicks) {
       router.push("/vault");
     }
   }
