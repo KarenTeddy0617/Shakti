@@ -1,66 +1,57 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import { recipes } from "./data/recipes";
+import RecipeCard from "./components/RecipeCard";
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.js file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+    <div style={{ padding: "20px" }}>
+      <section style={landingStyle}>
+        <h1 style={{fontSize:"100px"}}>SHAKTI Kitchen</h1>
+        
+        <p style={{width:"500px"}}>
+          A digital gateway to the heart of Kerala, guiding you through
+authentic spice traditions and professional Malayali techniques
+to turn every meal into a masterpiece of flavor.
+        </p>
+        <a href="#recipes">
+          <button style={startButton}>Explore Recipes</button>
+        </a>
+      </section>
+      <section id ="recipes">
+      <div style={gridStyle}>
+        {recipes.map(recipe => (
+          <RecipeCard key={recipe.id} recipe={recipe} />
+        ))}
+      </div>
+      </section>
     </div>
   );
 }
+
+const landingStyle = {
+  color:"white",
+  
+  height: "100vh",
+  backgroundImage: 
+    "linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('https://media.istockphoto.com/id/1632495064/photo/wooden-table-top-on-blur-kitchen-room-background-modern-kitchen-room-interior.jpg?s=612x612&w=0&k=20&c=8zTlzrr7rcViyii8pZlYt8GRpanwniryKJhi-r1zf1E=')",
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  backgroundRepeat: "no-repeat",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  textAlign: "center",
+  padding: "20px",
+};
+const startButton = {
+  marginTop: "20px",
+  padding: "10px 20px",
+  cursor: "pointer",
+};
+const gridStyle = {
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+  gap: "20px",
+  marginTop: "20px",
+  
+};
