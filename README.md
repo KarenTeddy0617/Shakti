@@ -1,4 +1,4 @@
-<p align="center">
+<img width="1915" height="898" alt="image" src="https://github.com/user-attachments/assets/b515aa5f-df1c-46a5-83a3-7d44d6433f10" /><p align="center">
   <img src="./img.png" alt="Project Banner" width="100%">
 </p>
 
@@ -56,27 +56,33 @@ SHAKTI provides a stealthy, modular safety system disguised as a normal cooking/
 
 ## Features
 
-List the key features of your project:
-- Feature 1: [Description]
-- Feature 2: [Description]
-- Feature 3: [Description]
-- Feature 4: [Description]
+## Features
 
----
+- **Disguised Interface**: Appears as a normal cooking/recipe app to avoid suspicion.  
+- **Hidden Vault (Passive Protection)**: Securely stores notes, photos, and audio entries with timestamps and GPS data.  
+- **SOS Trigger (Active Emergency)**: Hidden activation (e.g., triple-tap on a selected ingredient) to silently capture location and audio, and alert trusted contacts.  
+- **Monitor Dashboard**: Trusted contacts can view the latest emergency, play recorded audio, see location, and optionally track risk trends.  
+- **Customizable Trigger Settings**: Users can choose their secret ingredient and number of taps to activate SOS.  
+- **Stealthy Notifications**: Alerts trusted contacts without revealing the user’s actions to any observer.
+
 
 ## Implementation
 
 ### For Software:
 
-#### Installation
-```bash
-[Installation commands - e.g., npm install, pip install -r requirements.txt]
-```
+## Implementation
 
-#### Run
-```bash
-[Run commands - e.g., npm start, python app.py]
-```
+### Installation
+
+
+# Clone the repository
+git clone https://github.com/your-username/shakti.git
+cd shakti
+
+# Install dependencies (Next.js + Supabase + pdf-lib)
+npm install
+# Start Next.js development server
+npm run dev
 
 ## Project Documentation
 
@@ -84,8 +90,9 @@ List the key features of your project:
 
 #### Screenshots (Add at least 3)
 
-![Screenshot1](Add screenshot 1 here with proper name)
-*Add caption explaining what this shows*
+
+
+
 
 ![Screenshot2](Add screenshot 2 here with proper name)
 *Add caption explaining what this shows*
