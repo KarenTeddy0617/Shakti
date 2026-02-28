@@ -7,9 +7,6 @@ export default function PdfTest() {
   const [entries, setEntries] = useState([]);
   const DEMO_USER_ID = "11111111-1111-1111-1111-111111111111";
 
-  // ==============================
-  // Fetch previous journal entries
-  // ==============================
   useEffect(() => {
     async function fetchEntries() {
       const { data, error } = await supabase
@@ -23,20 +20,15 @@ export default function PdfTest() {
     fetchEntries();
   }, []);}
 
-  // ==============================
-  // Generate PDF with all entries
-  // ==============================
   const generatePdf = async () => {
     const pdfDoc = await PDFDocument.create();
     const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman);
 
-    let y = 750; // start from top of page
-    const page = pdfDoc.addPage([600, 800]);
     const fontSize = 14;
-    /*new added*/
     const lineHeight = 20; // spacing between lines
     const maxWidth = 500; // wrap text within this width
-    /*till*/
+    let y = 750;
+    let page = pdfDoc.addPage([600, 800]);
 
     page.drawText("Secure Vault PDF Report", {
       x: 50,
@@ -45,7 +37,6 @@ export default function PdfTest() {
       font: timesRomanFont,
       color: rgb(1, 0, 0),
     });
-
     y -= 40;
 
     /*for (let i = 0; i < entries.length; i++) {
@@ -67,6 +58,12 @@ export default function PdfTest() {
     }
     /*
 
+      // If page is full, add a new page first
+      if (y < 100) {
+        page = pdfDoc.addPage([600, 800]);
+        y = 750;
+      }
+
       // Draw note text
       page.drawText(`Note #${i + 1}: ${e.note}`, {
         x: 50,
@@ -76,10 +73,9 @@ export default function PdfTest() {
         color: rgb(0, 0, 0),
         maxWidth: 500,
       });
-
       y -= 30;
 
-      // Draw image URL (you can click after PDF download)
+      // Draw image URL
       if (e.image_url) {
         page.drawText(`Image: ${e.image_url}`, {
           x: 50,
@@ -91,27 +87,28 @@ export default function PdfTest() {
         });
         y -= 20;
       }
-      if (e.audio_url) {
-  page.drawText(`Audio: ${e.audio_url}`, { x: 50, y, size: fontSize, font: timesRomanFont, color: rgb(0,0,1) });
-  y -= 20;
-}
 
-      // If the page is full, add a new page
-      if (y < 100) {
-        y = 750;
-        page.addPage([600, 800]);
+      // Draw audio URL
+      if (e.audio_url) {
+        page.drawText(`Audio: ${e.audio_url}`, {
+          x: 50,
+          y,
+          size: fontSize,
+          font: timesRomanFont,
+          color: rgb(0, 0, 1),
+          maxWidth: 500,
+        });
+        y -= 20;
       }
     }
 
     const pdfBytes = await pdfDoc.save();
-
     const blob = new Blob([pdfBytes], { type: "application/pdf" });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
     link.download = "VaultReport.pdf";
     link.click();
   };
- 
 
   return (
     <div style={{ padding: "20px" }}>

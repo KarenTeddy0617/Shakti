@@ -66,6 +66,13 @@ export default function VaultPage() {
 
   return (
     <div className="vault-dark">
+      <button
+    type="button"
+    style={{ backgroundColor: "#ffe100", color: "#000"}}
+    onClick={() => router.push("/vault/settings")}
+  >
+    Settings
+  </button>
       <h2 style={{ textAlign: "center", fontSize: "50px" }}>🔐 Secure Journal</h2>
 
       <form onSubmit={handleSubmit}>
@@ -113,6 +120,7 @@ export default function VaultPage() {
           />
         </div>
       </form>
+      
 
       <hr />
 
@@ -151,5 +159,7 @@ export default function VaultPage() {
         Generate PDF of Vault
       </button>
     </div>
+
+    
   );
 }

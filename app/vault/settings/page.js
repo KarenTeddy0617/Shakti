@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabaseClient";
-import "../styles/vault.css"
+import "../styles/vault.css";
+
 
 export default function Settings() {
   const [selected, setSelected] = useState("");
