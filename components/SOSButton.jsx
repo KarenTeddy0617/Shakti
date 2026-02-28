@@ -19,8 +19,8 @@ export default function SOSButton({ userId, entries, fetchEntries, setEntries })
       };
 
       mediaRecorder.start();
-      alert("🚨 Recording started for 30 seconds");
-      setTimeout(() => mediaRecorder.stop(), 30000);
+      alert("🚨 Recording started for 10 seconds");
+      setTimeout(() => mediaRecorder.stop(), 10000);
 
     } catch (err) {
       console.error(err);
