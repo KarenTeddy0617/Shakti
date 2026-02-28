@@ -13,7 +13,7 @@
 - Member 2: Karen Teddy Vadakkan - Govt. Model Engineering College
 
 ### Hosted Project Link
-[mention your project hosted link here]
+https://shakti-two.vercel.app
 
 ### Project Description
 A stealthy, modular safety and monitoring system disguised as a normal cooking/recipe web app (“Kerala Kitchen”). Designed for emergency capture, evidence collection, and alerting trusted contacts without raising suspicion. Ideal for hackathon demo with strong stealth UX.
@@ -55,9 +55,6 @@ SHAKTI provides a stealthy, modular safety system disguised as a normal cooking/
 
 
 ## Features
-
-## Features
-
 - **Disguised Interface**: Appears as a normal cooking/recipe app to avoid suspicion.  
 - **Hidden Vault (Passive Protection)**: Securely stores notes, photos, and audio entries with timestamps and GPS data.  
 - **SOS Trigger (Active Emergency)**: Hidden activation (e.g., triple-tap on a selected ingredient) to silently capture location and audio, and alert trusted contacts.  
@@ -89,28 +86,103 @@ npm run dev
 ### For Software:
 
 #### Screenshots (Add at least 3)
+https://drive.google.com/file/d/1JvGlhLB_YjUqr4Ryyyb6AdAh0gadO4vD/view?usp=sharing
+https://drive.google.com/file/d/12WvaNwCcL3gaUB0pg3fOyWIkDYobyEL4/view?usp=sharing
+https://drive.google.com/file/d/1acbfZgK3IiyN1PHg41RUffz3rVpQGFGh/view?usp=sharing
+https://drive.google.com/file/d/13XirEAwttXavyzxyxDhFubQm7fnu4doR/view?usp=sharing
+https://drive.google.com/file/d/1p2rC-u2Yw9Rdp4en9868o539CBrS3DVW/view?usp=sharing
+https://drive.google.com/file/d/1CIXGmAS7p9qDf5i3HE2jvaLCwu4evNaZ/view?usp=sharing
+https://drive.google.com/file/d/1u0lcf_COMxLuYfa1oWDg7TsrBFga7Ya3/view?usp=sharing
+https://drive.google.com/file/d/1E5IKGEQsWB7H-b5XJ3ZPKFVhmZiiKmjY/view?usp=sharing
 
-
-
-
-
-![Screenshot2](Add screenshot 2 here with proper name)
-*Add caption explaining what this shows*
-
-![Screenshot3](Add screenshot 3 here with proper name)
-*Add caption explaining what this shows*
 
 #### Diagrams
 
 **System Architecture:**
++-------------------+        +-------------------+       +-------------------+
+|                   |        |                   |       |                   |
+|   Next.js Frontend | <----> |  Supabase Backend | <---->|  Supabase Storage |
+| (Cooking UI +     |        | (Auth + Database) |       |  (Photos, Audio, |
+|  SOS Triggers,    |        |                   |       |   PDFs)           |
+|  Vault, PDF-lib)  |        |                   |       |                   |
++-------------------+        +-------------------+       +-------------------+
+          |
+          v
++-------------------+
+| Monitor Dashboard |
+| (Trusted Contact) |
+---------------------
+Frontend
 
-![Architecture Diagram](docs/architecture.png)
-*Explain your system architecture - components, data flow, tech stack interaction*
+Built with Next.js (React)
+
+Disguised UI: Kerala Kitchen Recipe App
+
+Hidden gesture-based SOS trigger
+
+Backend
+
+Supabase
+
+Authentication
+
+Realtime Database
+
+Storage (audio, images)
+
+Row-Level Security (RLS)
+
+External APIs
+
+Browser Geolocation API (GPS capture)
+
+MediaRecorder API (audio capture)
 
 **Application Workflow:**
+1️⃣ Normal Mode (Disguised Cooking App)
 
-![Workflow](docs/workflow.png)
-*Add caption explaining your workflow*
+User browses recipes → Looks completely normal.
+
+2️⃣ Hidden Vault Mode
+
+User secretly stores:
+
+Notes
+
+Photos
+
+Audio logs
+All entries:
+
+Timestamped
+
+GPS tagged
+
+Stored securely in Supabase
+
+3️⃣ SOS Trigger
+
+User triple-taps selected ingredient →
+
+Location captured
+
+30-sec audio recorded
+
+Emergency flagged in database
+
+Trusted contact notified
+
+4️⃣ Monitor Dashboard
+
+Trusted contact can:
+
+View emergency status
+
+See GPS location
+
+Play recorded audio
+
+Track previous incidents
 
 ## Additional Documentation
 
@@ -121,67 +193,57 @@ npm run dev
 **Base URL:** `https://api.yourproject.com`
 
 ##### Endpoints
+GET /api/sos/latest
 
-**GET /api/endpoint**
-- **Description:** [What it does]
-- **Parameters:**
-  - `param1` (string): [Description]
-  - `param2` (integer): [Description]
-- **Response:**
-```json
+Description: Fetch latest emergency record
+
+Response:
+
 {
   "status": "success",
-  "data": {}
+  "data": {
+    "location": "12.9716, 77.5946",
+    "timestamp": "2026-02-28T18:30:00Z",
+    "audio_url": "https://supabase.storage/xyz"
+  }
 }
-```
+POST /api/sos/trigger
 
-**POST /api/endpoint**
-- **Description:** [What it does]
-- **Request Body:**
-```json
+Description: Trigger emergency capture
+
+Request:
+
 {
-  "field1": "value1",
-  "field2": "value2"
+  "user_id": "uuid",
+  "location": "lat,long"
 }
-```
-- **Response:**
-```json
+
+Response:
+
 {
   "status": "success",
-  "message": "Operation completed"
+  "message": "SOS activated"
 }
-```
-
-[Add more endpoints as needed...]
 
 
 ## Project Demo
 
 ### Video
-[Add your demo video link here - YouTube, Google Drive, etc.]
-
-*Explain what the video demonstrates - key features, user flow, technical highlights*
-
-### Additional Demos
-[Add any extra demo materials/links - Live site, APK download, online demo, etc.]
+https://drive.google.com/file/d/1Br0dKVkBY6gnebeTJRUe1-F5XUmB2DQN/view?usp=drivesdk
 
 ## AI Tools Used (Optional - For Transparency Bonus)
 
 If you used AI tools during development, document them here for transparency:
 
-**Tool Used:** [e.g., GitHub Copilot, v0.dev, Cursor, ChatGPT, Claude]
+**Tool Used:** ChatGPT,Gemini
 
 **Purpose:** [What you used it for]
-- Example: "Generated boilerplate React components"
-- Example: "Debugging assistance for async functions"
-- Example: "Code review and optimization suggestions"
+Debugging assistance for async functions,Code review and optimization suggestions"
 
 **Key Prompts Used:**
 - "Create a REST API endpoint for user authentication"
 - "Debug this async function that's causing race conditions"
 - "Optimize this database query for better performance"
-
-**Percentage of AI-generated code:** [Approximately X%]
 
 **Human Contributions:**
 - Architecture design and planning
@@ -195,15 +257,8 @@ If you used AI tools during development, document them here for transparency:
 
 ## Team Contributions
 
-- [Name 1]: [Specific contributions - e.g., Frontend development, API integration, etc.]
-- [Name 2]: [Specific contributions - e.g., Backend development, Database design, etc.]
-- [Name 3]: [Specific contributions - e.g., UI/UX design, Testing, Documentation, etc.]
-
----
-
-## License
-
-This project is licensed under the [LICENSE_NAME] License - see the [LICENSE](LICENSE) file for details.
+Anamika -Frontend
+Karen-Database and connectivity
 
 **Common License Options:**
 - MIT License (Permissive, widely used)
