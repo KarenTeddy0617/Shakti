@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabaseClient";
+import "../styles/vault.css"
 
 export default function Settings() {
   const [selected, setSelected] = useState("");
@@ -67,7 +68,7 @@ export default function Settings() {
   };
 
   return (
-    <div style={{ padding: "40px" }}>
+    <div div className="vault-dark">
       <h1>⚙ Choose Your Trigger Ingredient</h1>
 
       <div style={{ marginTop: "20px" }}>

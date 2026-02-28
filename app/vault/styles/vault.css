@@ -1,0 +1,111 @@
+.vault-dark {
+  background-color:#1f2035 ;
+  color: #e0e0e0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.vault-dark a,
+.vault-dark button {
+  color: #009384;
+  transition: 0.3s ease;
+}
+
+.vault-dark a:hover,
+.vault-dark button:hover {
+  color: #786d20;
+}
+
+.vault-dark .card {
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  margin: 15px 0;
+}
+
+.vault-dark .button {
+  background: linear-gradient(135deg, #00ab9a, #00bfa5);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  color: #121212;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.vault-dark .button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 255, 231, 0.5);
+}
+
+.vault-dark input,
+.vault-dark textarea {
+  background-color: #1f1f1f;
+  color: #e0e0e0;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 10px;
+  width: 100%;
+  transition: 0.3s ease;
+}
+
+.vault-dark input:focus,
+.vault-dark textarea:focus {
+  border-color: #00ffe7;
+  box-shadow: 0 0 8px #00ffe7;
+  outline: none;
+}
+
+.vault-dark {
+  background-color: #111; /* dark theme */
+  color: #fff;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Previous entries card */
+.entry-card {
+  border: 2px solid #14ffc8;  
+  border-radius: 8px;          
+  padding: 15px;               
+  margin-bottom: 15px;         
+  background-color: #00000010;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+}
+
+.entry-card img {
+  width: 200px;
+  margin-top: 5px;
+  border-radius: 4px;
+}
+
+.entry-card audio {
+  display: block;
+  margin-top: 5px;
+}
+
+.entry-card small {
+  display: block;
+  margin-top: 5px;
+  color: #ccc;
+}
+
+/* Button row */
+.button-row {
+  display: flex;
+  justify-content: space-between; /* spread buttons */
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.button-row button, 
+.button-row .sos-button {
+  flex: 1; /* equal width */
+  padding: 12px 30px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+}
